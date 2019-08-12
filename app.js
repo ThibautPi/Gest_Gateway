@@ -16,7 +16,8 @@ app.use(bodyParser.json({limit:'50mb',extended:true}));
 
 // Routes
 app.use('/gestures',require('./routes/gateway_Gestures'));
-app.use('/auth',require('./routes/gateway_Authentification'))
+app.use('/auth',require('./routes/gateway_Authentification'));
+app.use('/profile',require('./routes/gateway_Profile'));
 
 // Start the server
 const port = process.env.PORT || 5000;
