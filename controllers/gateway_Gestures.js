@@ -12,7 +12,7 @@ module.exports = {
             body : JSON.stringify({name,description}),
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
              }
         })
         .then(response => {
@@ -37,7 +37,7 @@ module.exports = {
                 body : JSON.stringify({name,description,gesture_set_id : set_id}),
                 headers: { 
                     'Content-Type': 'application/json',
-                    'authorization': req.headers.authorization
+                    'x-firebase-id-token': req.headers['x-firebase-id-token']
                 }
             })
             .then(response => {
@@ -64,7 +64,7 @@ module.exports = {
                     body : JSON.stringify({name,description,gesture_class_id : class_id,user_id,strokes,sample_type}),
                     headers: { 
                         'Content-Type': 'application/json',
-                        'authorization': req.headers.authorization 
+                        'x-firebase-id-token': req.headers['x-firebase-id-token']
                     }
                 })
                 .then(response => {
@@ -79,13 +79,17 @@ module.exports = {
         }
         res.status(201).json("Request pending");
     },
-    getSets: async function(req,res,next){
 
+
+
+
+    getSets: async function(req,res,next){
+        
         var set = await fetch(config.URL_GESTURES_SET,{ 
             method : 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': req.headers.authorization
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
          }
         })
         .then(response => {
@@ -94,6 +98,13 @@ module.exports = {
       response = await set.response
       res.status(set.status).json(response);
     },
+
+
+
+
+
+
+
     updateSet: async function(req,res,next){
         const url = config.URL_GESTURES_SET + "/" + req.params.gesture_set_id;
         var set = await fetch(url,{
@@ -102,7 +113,7 @@ module.exports = {
             body: JSON.stringify(req.body),  
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {
@@ -112,13 +123,15 @@ module.exports = {
         res.status(set.status).json(response);
     },
 
+
+
     deleteSet: async function(req,res,next){
         const url = config.URL_GESTURES_SET + "/" + req.params.gesture_set_id;
         var set = await fetch(url,{
             method : 'DELETE',
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token'] 
             }
         })
         .then(response => {
@@ -128,13 +141,15 @@ module.exports = {
       res.status(set.status).json(response);
     },
 
+
+
     getSetClasses: async function(req,res,next){
         const url = config.URL_GESTURES_SET + "/" + req.params.gesture_set_id+"/classes";
         var set = await fetch(url,{
             method : 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {
@@ -150,7 +165,7 @@ module.exports = {
             method : 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {
@@ -167,7 +182,7 @@ module.exports = {
             body: JSON.stringify(req.body),  
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {
@@ -183,7 +198,7 @@ module.exports = {
             method : 'DELETE', 
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token'] 
             }
         })
         .then(response => {
@@ -199,7 +214,7 @@ module.exports = {
             method : 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {
@@ -216,7 +231,7 @@ module.exports = {
             body: JSON.stringify(req.body),  
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {
@@ -232,7 +247,7 @@ module.exports = {
             method : 'DELETE', 
             headers: { 
                 'Content-Type': 'application/json',
-                'authorization': req.headers.authorization 
+                'x-firebase-id-token': req.headers['x-firebase-id-token']
             }
         })
         .then(response => {

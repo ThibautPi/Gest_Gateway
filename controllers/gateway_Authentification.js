@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const config = require('../configuration/index');
 
 module.exports = {
+
     signIn : async function(req,res,next){
         var auth = await fetch(config.URL_AUTHENTIFICATION_SIGNIN,{ 
             method : 'POST',
@@ -14,6 +15,7 @@ module.exports = {
         response = await auth.response
         res.status(auth.status).json(response);
     },
+
     signUp : async function(req,res,next){
         var auth = await fetch(config.URL_AUTHENTIFICATION_SIGNUP,{ 
             method : 'POST',
@@ -40,6 +42,7 @@ module.exports = {
         response = await auth.response
         res.status(auth.status).json(response);
     },
+
     googleOAuth: async function(req,res,next){
         var auth = await fetch(config.URL_AUTHENTIFICATION_GOOGLE,{ 
             method : 'POST',
